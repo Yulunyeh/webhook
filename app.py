@@ -10,4 +10,5 @@ def index(): #用來回應網頁首頁連線的函式
 def info():
     return "相關資訊"
 #啟動伺服器
-app.run()
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=3000)
