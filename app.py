@@ -1,4 +1,6 @@
-from flask import Flask #載入Flask
+from flask import Flask, abort, request #載入Flask
+
+
 app=Flask(__name__) #建立application 物件
 
 #建立網站首頁的回應方式
