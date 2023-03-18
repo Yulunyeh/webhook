@@ -1,5 +1,10 @@
 from flask import Flask, abort, request #載入Flask
-
+# https://github.com/line/line-bot-sdk-python
+from linebot import LineBotApi, WebhookHandler
+from linebot.exceptions import InvalidSignatureError
+from linebot.models import MessageEvent, TextMessage, TextSendMessage
+import openai
+import os
 
 app=Flask(__name__) #建立application 物件
 
