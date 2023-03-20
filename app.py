@@ -25,9 +25,10 @@ def handle_message(event):
     get_message = event.message.text
 
     # Send To Line
+    index
     reply = TextSendMessage(text=f"{get_message}")
     line_bot_api.reply_message(event.reply_token, reply)
-    retrun reply+"<br>"
+    
 
 #啟動伺服器
 if __name__ == "__main__":
