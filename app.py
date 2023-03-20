@@ -25,9 +25,9 @@ def handle_message(event):
     get_message = event.message.text
 
     # Send To Line
-    reply = TextSendMessage(get_message)
+    reply = TextSendMessage(text=get_message)
     line_bot_api.reply_message(event.reply_token, reply)
-    
+   
 
 #啟動伺服器
 if __name__ == "__main__":
