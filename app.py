@@ -25,8 +25,7 @@ def handle_message(event):
     get_message = event.message.text
 
     # Send To Line
-    index
-    reply = TextSendMessage(text=f"{get_message}")
+    reply = TextSendMessage(get_message)
     line_bot_api.reply_message(event.reply_token, reply)
     
 
