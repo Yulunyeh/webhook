@@ -52,7 +52,7 @@ def generate_response(prompt):
     
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    if event.source.user_id != "ae1838d725d0d9321c4336c7ffda695f"
+    if event.source.user_id != "ae1838d725d0d9321c4336c7ffda695f":
         get_message = event.message.text
     
 
