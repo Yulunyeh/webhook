@@ -20,6 +20,22 @@ def index(): #用來回應網頁首頁連線的函式
 def info():
     return "相關資訊<br>"
 
+@app.route("/callback", methods=["POST"])
+def callback():
+
+    if request.method == "GET":
+        return "Hello World from Callback."
+    if request.method == "POST":
+        signature = request.headers["X-Line-Signature"]
+        body = request.get_data(as_text=True)
+
+        try:
+            handler.handle(body, signature)
+        except InvalidSignatureError:
+            abort(400)
+
+        return "OK"
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     get_message = event.message.text
