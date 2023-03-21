@@ -57,8 +57,9 @@ def handle_message(event):
     
 
         # Send To Line
-        reply= generate_response(prompt=TextSendMessage(text=get_message))
-        line_bot_api.reply_message(event.reply_token, reply)
+        reply= generate_response(prompt=get_message)
+        
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply))
     
    
 
