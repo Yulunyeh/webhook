@@ -12,14 +12,6 @@ handler = WebhookHandler("ae1838d725d0d9321c4336c7ffda695f")
 
 
 #建立網站首頁的回應方式
-@app.route("/") 
-def index(): #用來回應網頁首頁連線的函式
-    return "hello flasklab!!<br>"
-
-@app.route("/page1")
-def info():
-    return "相關資訊<br>"
-
 @app.route("/callback", methods=["POST"])
 def callback():
 
