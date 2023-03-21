@@ -12,11 +12,11 @@ handler = WebhookHandler("ae1838d725d0d9321c4336c7ffda695f")
 
 
 #建立網站首頁的回應方式
-@app.route("/callback", methods=["POST"])
+@app.route("/", methods=["GET", "POST"])
 def callback():
 
     if request.method == "GET":
-        return "Hello World from Callback."
+        return "Hello World!!"
     if request.method == "POST":
         signature = request.headers["X-Line-Signature"]
         body = request.get_data(as_text=True)
