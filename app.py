@@ -41,9 +41,10 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    text = event.message.text
     response=openai.Completion.create(
                     engine="text-davinci-003",
-                    prompt=event.message.text,
+                    prompt=text,
                     max_tokens=150,
                     n=1,
                     stop=None,
@@ -53,8 +54,11 @@ def handle_message(event):
         
     # if event.source.user_id != "ae1838d725d0d9321c4336c7ffda695f":       
     # Send To Line 
-    reply=response.choices[0].text 
-    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply))
+    reply=response.choices[0].text.strip()
+    line_bot_api.reply_message(
+        event.reply_token, 
+        TextSendMessage(text=reply)
+    )
         
     
 #啟動伺服器
