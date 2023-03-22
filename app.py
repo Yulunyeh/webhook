@@ -15,18 +15,14 @@ openai.api_key="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"
 #建立網站首頁的回應方式
 @app.route("/") 
 def index(): #用來回應網頁首頁連線的函式
-    return "hello flask!!!!!吃早餐了"
+    return "Hello World!! flask+OpenAI+LineBot!!!!!"
 
 @app.route("/page1")
 def info():
     return "相關資訊"
 
-@app.route("/callback", methods=["GET", "POST"])
+@app.route("/callback", methods=["POST"])
 def callback():
-
-    if request.method == "GET":
-        return "Hello World!!"
-    if request.method == "POST":
         signature = request.headers["X-Line-Signature"]
         body = request.get_data(as_text=True)
         app.logger.info("Request body: " + body) 
