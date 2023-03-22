@@ -9,7 +9,7 @@ import openai
 app=Flask(__name__) #建立application 物件
 line_bot_api = LineBotApi("cjdsY5UFfcFL5iFWtKGBgZA5XuRNimer8zhHqGWGg4pDzzVIBEe+CahXeBYQQm9oN6JoVhgUhw0rxSEgJ4Fz1x9lNBv4cTMrEMfAJtNs4mFXTOlDcFnKNikw4VDDMT0gImC875xyja2RRbCTBropEgdB04t89/1O/w1cDnyilFU=")
 handler = WebhookHandler("ae1838d725d0d9321c4336c7ffda695f")
-openai.api_key = "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"
+openai.api_key = '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'
 
 #建立網站首頁的回應方式
 @app.route("/") 
@@ -40,8 +40,7 @@ def callback():
  
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    if event.source.user_id != "ae1838d725d0d9321c4336c7ffda695f":
-        openai.api_key = "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"
+    if event.source.user_id != "ae1838d725d0d9321c4336c7ffda695f":        
         prompt = event.message.text
         def generate_response(prompt):
             response = openai.Completion.create(
