@@ -41,6 +41,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     if event.source.user_id != "ae1838d725d0d9321c4336c7ffda695f":
+        openai.api_key = "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"
         promptx = event.message.text
         def generate_response(prompt):
             response = openai.Completion.create(
