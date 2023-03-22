@@ -51,9 +51,8 @@ def callback():
  
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    if event.source.user_id != "ae1838d725d0d9321c4336c7ffda695f":        
-         
-    # Send To Line 
+    if event.source.user_id != "ae1838d725d0d9321c4336c7ffda695f":       
+        # Send To Line 
         reply = generate_response(event.message.text)
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply))
     
