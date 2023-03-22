@@ -37,33 +37,27 @@ def callback():
 
         return "OK"
 
-def generate_response(prompt):
-    response = openai.Completion.create(
-        engine="text-davinci-003",
-        prompt=prompt,
-        max_tokens=150,
-        n=1,
-        stop=None,
-        temperature=0.7,
-    )
 
-    generated_text = response.choices[0].text 
-    return geterated_text    
     
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     if event.source.user_id != "ae1838d725d0d9321c4336c7ffda695f":
-        get_message = event.message.text
+        prompt = event.message.text
+        def generate_response(prompt):
+            response = openai.Completion.create(
+            engine="text-davinci-003",
+            prompt=prompt,
+            max_tokens=150,
+            n=1,
+            stop=None,
+            temperature=0.7,
+        )
+        aireply = response.choices[0].text 
+          
+
+        # Send To Line             
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=aireply))
     
-
-        # Send To Line
-        reply= generate_response(prompt=get_message)
-        
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply))
-    
-   
-
-
 #啟動伺服器
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=3000)
