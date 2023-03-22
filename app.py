@@ -37,25 +37,24 @@ def callback():
 
         return "OK"
 
+ def generate_response(prompt):
+     response = openai.Completion.create(
+                engine="text-davinci-003",
+                prompt=prompt,
+                max_tokens=150,
+                n=1,
+                stop=None,
+                temperature=0.7,
+                )
+     aireply = response.choices[0].text 
+     return aireply   
  
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     if event.source.user_id != "ae1838d725d0d9321c4336c7ffda695f":        
-        prompt = event.message.text
-        def generate_response(prompt):
-            response = openai.Completion.create(
-                            engine="text-davinci-003",
-                            prompt=prompt,
-                            max_tokens=150,
-                            n=1,
-                            stop=None,
-                            temperature=0.7,
-                        )
-            aireply = response.choices[0].text 
-            return aireply
-    
+         
     # Send To Line 
-        reply = generate_response(prompt)
+        reply = generate_response(event.message.text)
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply))
     
 #啟動伺服器
