@@ -39,19 +39,6 @@ def callback():
             abort(400)
 
         return "OK"
-
-def generate_response(prompt):
-    response = openai.Completion.create(
-        engine="text-davinci-003",
-        prompt=prompt,
-        max_tokens=150,
-        n=1,
-        stop=None,
-        temperature=0.7,
-    )
-
-    generated_text = response.choices[0].text 
-    return geterated_text
     
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
