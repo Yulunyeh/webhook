@@ -38,12 +38,13 @@ def callback():
         return "OK"
 
  
-openai.api_key = "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"
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     
     def generate_response(prompt):
-     response = openai.Completion.create(
+        openai.api_key = "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"
+        response = openai.Completion.create(
                 engine="text-davinci-003",
                 prompt=prompt,
                 max_tokens=150,
@@ -51,8 +52,8 @@ def handle_message(event):
                 stop=None,
                 temperature=0.7,
                 )
-     aireply = response.choices[0].text 
-     return aireply   
+        return response.choices[0].text 
+        
     # if event.source.user_id != "ae1838d725d0d9321c4336c7ffda695f":       
         # Send To Line 
     reply = generate_response(event.message.text)
