@@ -37,38 +37,13 @@ def callback():
 
         return "OK"
 
-
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    if event.source.user_id != "ae1838d725d0d9321c4336c7ffda695f":
-         # model parameter
-        data = {
-                "model": "text-davinci-003",
-                "prompt": event.message.text,
-                 "max_tokens": 4000,
-                 "temperature": 0.9,
-                 # "top_p": 1,
-                 # "n": 1,
-                 # "stream": False,
-                 # "logprobs": None,
-                 # "stop": "\n"
-                }
-
-        # API from open ai
-        response = requests.post(
-                CHATGPT_URL,
-                headers={
-                    'Content-Type': 'application/json',
-                    'Authorization': " ".join(["Bearer", OPENAI_KEY])
-                    },
-            json=data)
-        res_json = response.json()
-        reply_text = res_json.get("choices")[0].get("text").replace("\n", "").replace("?", "")
-    
-        # Reply the text to client
-        line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=reply_text))
+    reply = event.message.text
+    line_bot_api.reply_message(
+            event.reply_token, 
+            TextSendMessage(text=reply)
+    )    
 
 #啟動伺服器
 if __name__ == "__main__":
