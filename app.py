@@ -47,8 +47,7 @@ def handle_message(event):
                     stop=None,
                     temperature=0.7,
                     )
-    
-        
+            
     # if event.source.user_id != "ae1838d725d0d9321c4336c7ffda695f":       
     # Send To Line 
     reply=response.choices[0].text.strip()
