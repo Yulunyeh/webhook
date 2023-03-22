@@ -9,7 +9,7 @@ import openai
 app=Flask(__name__) #建立application 物件
 line_bot_api = LineBotApi("cjdsY5UFfcFL5iFWtKGBgZA5XuRNimer8zhHqGWGg4pDzzVIBEe+CahXeBYQQm9oN6JoVhgUhw0rxSEgJ4Fz1x9lNBv4cTMrEMfAJtNs4mFXTOlDcFnKNikw4VDDMT0gImC875xyja2RRbCTBropEgdB04t89/1O/w1cDnyilFU=")
 handler = WebhookHandler("ae1838d725d0d9321c4336c7ffda695f")
-
+openai.api_key = "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"
 
 #建立網站首頁的回應方式
 @app.route("/") 
@@ -41,22 +41,19 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    
-    def generate_response(prompt):
-        openai.api_key = "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"
-        response = openai.Completion.create(
+    response = openai.Completion.create(
                 engine="text-davinci-003",
-                prompt=prompt,
+                prompt=event.message.text,
                 max_tokens=150,
                 n=1,
                 stop=None,
                 temperature=0.7,
                 )
-        return response.choices[0].text 
+    
         
     # if event.source.user_id != "ae1838d725d0d9321c4336c7ffda695f":       
-        # Send To Line 
-    reply = generate_response(event.message.text)
+    # Send To Line 
+    reply = response.choices[0].text 
     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply))
         
     
