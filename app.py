@@ -75,11 +75,10 @@ def handle_message(event):
                 headers={
                     'Content-Type': 'application/json',
                     'Authorization': " ".join(["Bearer", OPENAI_KEY])
-                },
-                json=data)
-
-       res_json = response.json()
-       reply_text = res_json.get("choices")[0].get("text").replace("\n", "").replace("?", "")
+                    },
+            json=data)
+        res_json = response.json()
+        reply_text = res_json.get("choices")[0].get("text").replace("\n", "").replace("?", "")
     
         # Reply the text to client
         line_bot_api.reply_message(
