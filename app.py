@@ -53,10 +53,10 @@ def handle_message(event):
                 )
      aireply = response.choices[0].text 
      return aireply   
-    if event.source.user_id != "ae1838d725d0d9321c4336c7ffda695f":       
+    # if event.source.user_id != "ae1838d725d0d9321c4336c7ffda695f":       
         # Send To Line 
-        reply = generate_response(event.message.text)
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply))
+    reply = generate_response(event.message.text)
+    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply))
         
     
 #啟動伺服器
